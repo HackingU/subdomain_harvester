@@ -1,9 +1,8 @@
 # WIP
 
-Version:1.0
+Version: 1.0
 - Features to be added:
 1. get subdomains from JSON file
-2. 
 
 ## How to use:
 Clone the project using:
