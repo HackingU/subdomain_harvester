@@ -24,7 +24,7 @@ def mountDomainUrl(target_url):
 
 def checkDomain(target_domain_url):
 	try:
-		statusCodes = [200, 301, 302, 401, 403]
+		statusCodes = [200, 201, 202, 204, 206, 301, 302, 401, 403]
 		req = requests.get(target_domain_url)
 		if req.status_code in statusCodes:
 			print('Domain found: {} - status_code: {}' .format(target_url, req.status_code))
@@ -51,6 +51,7 @@ def main():
 	wordlist = getWordlist()
 	targetDomainUrl = mountDomainUrl(targetDomain)
 	checkDomain(targetDomainUrl)
+	print(- * 25)
 	if checkDomain(targetDomainUrl):
 		wordlistFile = open(wordlist, "r")
 		for wordlist_item in wordlistFile:
