@@ -11,11 +11,10 @@ def getTargetInput():
 	return target
 
 def getWordlist():
-# 	wordlist = str(input('Path to Wordlist (you can leave blank if you want to use our default): '))
-# 	if wordlist == '':
-# 		wordlist = './wordlist/wordlist.txt'
-# 	return wordlist
-	return ["edu", "xxx"]
+	wordlist = str(input('Path to Wordlist (you can leave blank if you want to use our default): '))
+	if wordlist == '':
+		wordlist = './wordlist/wordlist.txt'
+	return wordlist
 
 def mountDomainUrl(target_url):
 	url_prefix = 'http://'
