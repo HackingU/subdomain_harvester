@@ -23,8 +23,9 @@ def mountDomainUrl(target_url):
 
 def checkDomain(target_domain_url):
 	try:
+		statusCodes = [200, 301, 302, 401, 403]
 		req = requests.get(target_domain_url)
-		if req.status_code == 200 or req.status_code == 301 or req.status_code == 302:
+		if req.status_code in statusCodes:
 			print('Domain found: {}' .format(target_domain_url))
 	except:
 		print('Domain "{}" not found' .format(target_domain_url))
