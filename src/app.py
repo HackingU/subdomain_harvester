@@ -12,7 +12,7 @@ def getTargetInput():
 def getWordlist():
 	wordlist = str(input('Wordlist (you can leave blank if you want to use our default): '))
 	if wordlist == '':
-		wordlist = 'wordlist.txt'
+		wordlist = './wordlist/wordlist.txt'
 	return wordlist
 
 def mountUrl(target_url, wordlist_item):
