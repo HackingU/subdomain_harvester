@@ -51,7 +51,7 @@ def main():
 	wordlist = getWordlist()
 	targetDomainUrl = mountDomainUrl(targetDomain)
 	checkDomain(targetDomainUrl)
-	print(- * 25)
+	print('-' * 25)
 	if checkDomain(targetDomainUrl):
 		wordlistFile = open(wordlist, "r")
 		for wordlist_item in wordlistFile:
