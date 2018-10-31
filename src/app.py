@@ -27,14 +27,14 @@ def checkDomain(target_domain_url):
 		statusCodes = [200, 201, 202, 204, 206, 301, 302, 401, 403]
 		req = requests.get(target_domain_url)
 		if req.status_code in statusCodes:
-			print('Domain found: {} - status_code: {}' .format(target_url, req.status_code))
+			print('Domain found: {} - status_code: {}' .format(target_domain_url, req.status_code))
 	except:
 		print('Domain "{}" not found' .format(target_domain_url))
 
 def mountSubdomainUrl(target_url, wordlist_item):
 	url_prefix = 'http://'
-	mountedUrl = '{}{}.{}' .format(url_prefix, wordlist_item, target_url)
-	return mountedUrl
+	mounted_url = '{}{}.{}' .format(url_prefix, wordlist_item, target_url)
+	return mounted_url
 
 def makeRequest(target_url):
 	statusCodes = [200, 301, 302, 401, 403]
@@ -56,7 +56,7 @@ def main():
 		wordlistFile = open(wordlist, "r")
 		for wordlist_item in wordlistFile:
 			wordlist_item = wordlist_item.rstrip()
-			target_url = mountSubdomainUrl(target, wordlist_item)
+			target_url = mountSubdomainUrl(targetDomainUrl, wordlist_item)
 			makeRequest(target_url)
 
 		wordlistFile.close()
