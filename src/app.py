@@ -19,7 +19,8 @@ def getWordlist():
 
 def mountDomainUrl(target_url):
 	url_prefix = 'http://'
-	mountedUrl = '{}{}' .format(url_prefix, target_url)
+	if target_url.startswith('https://') and not target_url.startswith('http://'):
+		mountedUrl = '{}{}' .format(url_prefix, target_url)
 	return mountedUrl
 
 def checkDomain(target_domain_url):
@@ -28,10 +29,12 @@ def checkDomain(target_domain_url):
 		req = requests.get(target_domain_url)
 		if req.status_code in statusCodes:
 			print('Domain found: {} - status_code: {}' .format(target_domain_url, req.status_code))
-	except:
+			return True
+	except requests.exceptions.RequestException:
 		print('Domain "{}" not found' .format(target_domain_url))
 
 def mountSubdomainUrl(target_url, wordlist_item):
+	target_url = target_url.replace('http://', '')
 	url_prefix = 'http://'
 	mounted_url = '{}{}.{}' .format(url_prefix, wordlist_item, target_url)
 	return mounted_url
@@ -42,7 +45,7 @@ def makeRequest(target_url):
 		req = requests.get(target_url)
 		if req.status_code in statusCodes:
 			print('Subdomain "{}" found - status_code: {}' .format(target_url, req.status_code))
-	except:
+	except requests.exceptions.RequestException:
 		print('Subdomain "{}" not found' .format(target_url))
 	
 
@@ -50,15 +53,14 @@ def main():
 	targetDomain = getTargetInput()
 	wordlist = getWordlist()
 	targetDomainUrl = mountDomainUrl(targetDomain)
-	checkDomain(targetDomainUrl)
 	print('-' * 25)
+	# checkDomain(targetDomainUrl)
 	if checkDomain(targetDomainUrl):
 		wordlistFile = open(wordlist, "r")
 		for wordlist_item in wordlistFile:
 			wordlist_item = wordlist_item.rstrip()
 			target_url = mountSubdomainUrl(targetDomainUrl, wordlist_item)
 			makeRequest(target_url)
-
 		wordlistFile.close()
 		
 

@@ -35,23 +35,31 @@ def checkDomain(target_domain_url)
 	case response
 	when Net::HTTPSuccess then
 		response
+		return true
 	when Net::HTTPRedirection then
 		location = response['location']
-		warn 'redirected to ' + location
+		# warn 'redirected to ' + location
 		checkDomain(location)
 	else
 		response.values
 	end
 	rescue
 		print "Domain #{target_domain_url} not found!"
-	
+end
+
+def mountSubdomainUrl(target_url, wordlist_item)
+
 end
 
 def main
 	targetDomain = getTargetInput
 	wordlist = getWordlist
 	targetDomainUrl = mountDomainUrl(targetDomain)
-	checkDomain(targetDomainUrl)
+	if checkDomain(targetDomainUrl)
+		File.open(wordlist, 'r').each do |line|
+			target_url = mountSubdomainUrl(targetDomainUrl, )
+		end
+	end
 end
 
 if __FILE__ == $0
